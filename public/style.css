@@ -1,0 +1,63 @@
+/* RepsRealm Theme: Purple / White / Black */
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f0ff; /* soft white-purple */
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+
+header {
+  background: #7A3AFF;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  display: inline-block;
+  background: #f9f7ff;
+  color: #7A3AFF;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 10px;
+  border: 2px solid #7A3AFF;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  background: #7A3AFF;
+  color: white;
+}
+
+.container {
+  width: 90%;
+  max-width: 850px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 14px;
+  border: 2px solid #7A3AFF22;
+  box-shadow: 0 0 20px rgba(122, 58, 255, 0.15);
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 15px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
