@@ -40,6 +40,27 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+// SHOW form page
+app.get("/add-workout", (req, res) => {
+  res.render("add-workout");
+});
+
+// HANDLE form submission
+app.post("/add-workout", (req, res) => {
+  const { exercise, weight, reps, notes } = req.body;
+
+  const sql = "INSERT INTO workouts (user_id, exercise, weight, reps, notes) VALUES (?, ?, ?, ?, ?)";
+
+  db.query(sql, [1, exercise, weight, reps, notes], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.send("Error saving workout.");
+    }
+    res.send("<h2>Workout saved successfully!</h2><a href='/'>Back Home</a>");
+  });
+});
+
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
