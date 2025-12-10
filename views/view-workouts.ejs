@@ -1,0 +1,38 @@
+<%- include("layout", {
+  title: "Your Workout History - RepsRealm",
+  body: `
+    <h2>Your Workout History</h2>
+
+    <% if (workouts.length === 0) { %>
+        <p>You have not logged any workouts yet.</p>
+        <a href="/add-workout">Add your first workout</a>
+    <% } else { %>
+
+    <table cellpadding="10" style="width:100%; border-collapse: collapse;">
+      <tr style="background:#7A3AFF; color:white;">
+        <th>Date</th>
+        <th>Exercise</th>
+        <th>Weight</th>
+        <th>Reps</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+
+      <% workouts.forEach(w => { %>
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td><%= new Date(w.created_at).toLocaleString() %></td>
+          <td><%= w.exercise %></td>
+          <td><%= w.weight %> kg</td>
+          <td><%= w.reps %></td>
+          <td><%= w.notes %></td>
+          <td>
+            <a href="/edit-workout/<%= w.id %>" class="btn-small">Edit</a>
+            <a href="/delete-workout/<%= w.id %>" class="btn-small delete">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+
+    <% } %>
+  `
+}) %>

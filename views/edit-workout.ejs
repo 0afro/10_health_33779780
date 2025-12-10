@@ -1,0 +1,26 @@
+<%- include("layout", {
+  title: "Edit Workout - RepsRealm",
+  body: `
+    <h2>Edit Workout</h2>
+
+    <form action="/edit-workout/${workout.id}" method="POST">
+
+      <label>Exercise Name:</label><br>
+      <input type="text" name="exercise" value="${workout.exercise}" required><br><br>
+
+      <label>Weight (kg):</label><br>
+      <input type="number" name="weight" value="${workout.weight}" required><br><br>
+
+      <label>Reps:</label><br>
+      <input type="number" name="reps" value="${workout.reps}" required><br><br>
+
+      <label>Notes:</label><br>
+      <textarea name="notes">${workout.notes || ""}</textarea><br><br>
+
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <br>
+    <a href="/view-workouts">⬅ Back to Workouts</a>
+  `
+}) %>

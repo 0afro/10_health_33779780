@@ -1,4 +1,6 @@
-/* RepsRealm Theme: Purple / White / Black */
+/* ----------------------------------------------------------
+   RepsRealm Theme: Purple / White / Black
+----------------------------------------------------------- */
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
@@ -7,6 +9,8 @@ body {
   padding: 0;
   color: #000;
 }
+
+/* Header / Navbar ------------------------------------------------- */
 
 header {
   background: #7A3AFF;
@@ -43,6 +47,8 @@ nav a:hover {
   color: white;
 }
 
+/* Container (all pages use this) ----------------------------------- */
+
 .container {
   width: 90%;
   max-width: 850px;
@@ -54,10 +60,115 @@ nav a:hover {
   box-shadow: 0 0 20px rgba(122, 58, 255, 0.15);
 }
 
+h2 {
+  color: #7A3AFF;
+  margin-top: 0;
+}
+
+/* Forms ------------------------------------------------------------- */
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 1rem;
+}
+
+form textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+button,
+input[type="submit"] {
+  background: #7A3AFF;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #5d23e6;
+}
+
+/* Workout Table ------------------------------------------------------ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th {
+  background: #7A3AFF;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Action Buttons in Table ------------------------------------------- */
+
+.btn-small {
+  background: #7A3AFF;
+  color: white !important;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 6px;
+  font-size: 0.85rem;
+}
+
+.btn-small:hover {
+  background: #5d23e6;
+}
+
+.delete {
+  background: #cc0000 !important;
+}
+
+.delete:hover {
+  background: #a30000 !important;
+}
+
+/* Footer ------------------------------------------------------------- */
+
 footer {
   text-align: center;
   margin-top: 40px;
   padding: 15px 0;
   color: #666;
   font-size: 0.9rem;
+}
+
+/* Responsive Layout -------------------------------------------------- */
+
+@media (max-width: 600px) {
+  nav a {
+    display: block;
+    margin: 6px 0;
+  }
+
+  table th,
+  table td {
+    font-size: 0.9rem;
+  }
+
+  button {
+    width: 100%;
+  }
 }

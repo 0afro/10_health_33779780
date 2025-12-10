@@ -10,9 +10,13 @@
 <header>
   <h1>RepsRealm</h1>
   <nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/add-workout">Add Workout</a>
+<% if (typeof user !== "undefined" && user) { %>
+  <a href="/add-workout">Add Workout</a>
+  <a href="/view-workouts">View Workouts</a>
+  <a href="/logout">Logout</a>
+<% } else { %>
+  <a href="/login">Login</a>
+<% } %>
   </nav>
 </header>
 
