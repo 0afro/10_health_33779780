@@ -1,43 +1,32 @@
-<%- include("layout", {
-  title: "Search Workouts - RepsRealm",
-  body: `
-    <h2>Search Workouts</h2>
+<% title = "Search"; %>
+<% body = `
+  <h2>Search Workouts</h2>
 
-    <form action="/search" method="POST" class="search-bar">
-      <input 
-        type="text" 
-        name="query" 
-        placeholder="Search exercises (e.g. bench, squat, curls)" 
-        required
-      >
-    </form>
+  <form action="/search" method="POST">
+    <input type="text" name="query" placeholder="Search exercises..." required>
+    <button type="submit">Search</button>
+  </form>
 
-    <% if (typeof results !== 'undefined') { %>
-      <h3>Results:</h3>
+  ${
+    results
+      ? results.length === 0
+        ? "<p>No results found.</p>"
+        : `
+            <table>
+              <tr><th>Date</th><th>Exercise</th><th>Weight</th><th>Reps</th><th>Notes</th></tr>
+              ${results.map(r => `
+                <tr>
+                  <td>${new Date(r.created_at).toLocaleString()}</td>
+                  <td>${r.exercise}</td>
+                  <td>${r.weight} kg</td>
+                  <td>${r.reps}</td>
+                  <td>${r.notes}</td>
+                </tr>
+              `).join("")}
+            </table>
+          `
+      : ""
+  }
+`; %>
 
-      <% if (results.length === 0) { %>
-        <p>No workouts found.</p>
-      <% } else { %>
-        <table cellpadding="10" style="width:100%; border-collapse: collapse;">
-          <tr style="background:#7A3AFF; color:white;">
-            <th>Date</th>
-            <th>Exercise</th>
-            <th>Weight</th>
-            <th>Reps</th>
-            <th>Notes</th>
-          </tr>
-
-          <% results.forEach(w => { %>
-            <tr>
-              <td><%= new Date(w.created_at).toLocaleString() %></td>
-              <td><%= w.exercise %></td>
-              <td><%= w.weight %> kg</td>
-              <td><%= w.reps %></td>
-              <td><%= w.notes %></td>
-            </tr>
-          <% }) %>
-        </table>
-      <% } %>
-    <% } %>
-  `
-}) %>
+<%- include("layout") %>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title><%= title %></title>
@@ -10,13 +10,17 @@
 <header>
   <h1>RepsRealm</h1>
   <nav>
-<% if (typeof user !== "undefined" && user) { %>
-  <a href="/add-workout">Add Workout</a>
-  <a href="/view-workouts">View Workouts</a>
-  <a href="/logout">Logout</a>
-<% } else { %>
-  <a href="/login">Login</a>
-<% } %>
+    <% if (user) { %>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/add-workout">Add Workout</a>
+      <a href="/view-workouts">View Workouts</a>
+      <a href="/search">Search</a>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
   </nav>
 </header>
 
@@ -25,7 +29,7 @@
 </div>
 
 <footer>
-  © <%= new Date().getFullYear() %> RepsRealm — Track Your Strength.
+  © <%= new Date().getFullYear() %> RepsRealm
 </footer>
 
 </body>
