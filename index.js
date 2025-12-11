@@ -286,6 +286,44 @@ app.post("/search", requireLogin, (req, res) => {
 });
 
 // ------------------------------------------------------------
+// PROGRESS GRAPH PAGE
+// ------------------------------------------------------------
+app.get("/progress", requireLogin, (req, res) => {
+  const sql = "SELECT DISTINCT exercise FROM workouts WHERE user_id = ?";
+  db.query(sql, [req.session.user.id], (err, rows) => {
+    if (err) return res.send("Error loading exercises.");
+
+    res.render("progress", { user: req.session.user, exercises: rows, data: null });
+  });
+});
+
+app.post("/progress", requireLogin, (req, res) => {
+  const exercise = req.body.exercise;
+
+  const sql =
+    "SELECT weight, reps, created_at FROM workouts WHERE user_id = ? AND exercise = ? ORDER BY created_at ASC";
+
+  db.query(sql, [req.session.user.id, exercise], (err, rows) => {
+    if (err) return res.send("Error loading progress data.");
+
+    // Extract values for the graph
+    const labels = rows.map(r => new Date(r.created_at).toLocaleDateString());
+    const weights = rows.map(r => r.weight);
+    const reps = rows.map(r => r.reps);
+
+    const sql2 = "SELECT DISTINCT exercise FROM workouts WHERE user_id = ?";
+    db.query(sql2, [req.session.user.id], (err2, exercises) => {
+      res.render("progress", {
+        user: req.session.user,
+        exercises,
+        data: { labels, weights, reps, exercise }
+      });
+    });
+  });
+});
+
+
+// ------------------------------------------------------------
 // Start Server
 // ------------------------------------------------------------
 app.listen(port, () => {

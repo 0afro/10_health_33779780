@@ -1,0 +1,60 @@
+<% title = "Progress Chart"; %>
+
+<% body = `
+  <h2>Your Progress</h2>
+
+  <form action="/progress" method="POST">
+    <label>Select Exercise:</label><br>
+    <select name="exercise" required>
+      <option value="">-- Choose exercise --</option>
+      ${
+        exercises
+          .map(ex => `<option value="${ex.exercise}">${ex.exercise}</option>`)
+          .join("")
+      }
+    </select>
+    <br><br>
+    <button type="submit">Show Progress</button>
+  </form>
+
+  ${
+    data
+      ? `
+        <h3>${data.exercise} Progress</h3>
+        <canvas id="progressChart" width="400" height="200"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+          const ctx = document.getElementById('progressChart').getContext('2d');
+
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ${JSON.stringify(data.labels)},
+              datasets: [
+                {
+                  label: 'Weight (kg)',
+                  data: ${JSON.stringify(data.weights)},
+                  borderColor: 'rgba(122, 58, 255, 1)',
+                  backgroundColor: 'rgba(122, 58, 255, 0.2)',
+                  borderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: false
+                }
+              }
+            }
+          });
+        </script>
+      `
+      : ""
+  }
+`; %>
+
+<%- include("layout") %>
