@@ -208,6 +208,61 @@ app.get("/view-workouts", requireLogin, (req, res) => {
 });
 
 // ------------------------------------------------------------
+// EDIT WORKOUT - SHOW FORM
+// ------------------------------------------------------------
+app.get("/edit-workout/:id", requireLogin, (req, res) => {
+  const sql = "SELECT * FROM workouts WHERE id = ? AND user_id = ?";
+
+  db.query(sql, [req.params.id, req.session.user.id], (err, rows) => {
+    if (err || rows.length === 0) {
+      return res.send("Workout not found or no permission.");
+    }
+
+    res.render("edit-workout", {
+      workout: rows[0],
+      user: req.session.user
+    });
+  });
+});
+
+// ------------------------------------------------------------
+// EDIT WORKOUT - SAVE CHANGES
+// ------------------------------------------------------------
+app.post("/edit-workout/:id", requireLogin, (req, res) => {
+  const { exercise, weight, reps, notes } = req.body;
+
+  const sql = `
+    UPDATE workouts
+    SET exercise = ?, weight = ?, reps = ?, notes = ?
+    WHERE id = ? AND user_id = ?
+  `;
+
+  db.query(
+    sql,
+    [exercise, weight, reps, notes, req.params.id, req.session.user.id],
+    (err) => {
+      if (err) return res.send("Error updating workout.");
+
+      res.redirect("/view-workouts");
+    }
+  );
+});
+
+// ------------------------------------------------------------
+// DELETE WORKOUT
+// ------------------------------------------------------------
+app.get("/delete-workout/:id", requireLogin, (req, res) => {
+  const sql = "DELETE FROM workouts WHERE id = ? AND user_id = ?";
+
+  db.query(sql, [req.params.id, req.session.user.id], (err) => {
+    if (err) return res.send("Error deleting workout.");
+
+    res.redirect("/view-workouts");
+  });
+});
+
+
+// ------------------------------------------------------------
 // SEARCH WORKOUTS
 // ------------------------------------------------------------
 app.get("/search", requireLogin, (req, res) => {

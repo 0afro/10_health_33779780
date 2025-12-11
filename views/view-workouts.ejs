@@ -1,22 +1,38 @@
 <% title = "Workout History"; %>
+
 <% body = `
   <h2>Your Workout History</h2>
 
   ${
     workouts.length === 0
-      ? "<p>No workouts logged yet.</p>"
+      ? "<p>You haven't logged any workouts yet.</p><a href='/add-workout'>Add your first workout</a>"
       : `
-        <table>
-          <tr><th>Date</th><th>Exercise</th><th>Weight</th><th>Reps</th><th>Notes</th></tr>
-          ${workouts.map(w => `
-            <tr>
+        <table cellpadding="10" style="width:100%; border-collapse: collapse;">
+          <tr style="background:#7A3AFF; color:white;">
+            <th>Date</th>
+            <th>Exercise</th>
+            <th>Weight</th>
+            <th>Reps</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+
+          ${workouts
+            .map(
+              (w) => `
+            <tr style="border-bottom:1px solid #ddd;">
               <td>${new Date(w.created_at).toLocaleString()}</td>
               <td>${w.exercise}</td>
               <td>${w.weight} kg</td>
               <td>${w.reps}</td>
               <td>${w.notes}</td>
-            </tr>
-          `).join("")}
+              <td>
+                <a href="/edit-workout/${w.id}" class="btn-small">Edit</a>
+                <a href="/delete-workout/${w.id}" class="btn-small delete" onclick="return confirm('Are you sure you want to delete this workout?');">Delete</a>
+              </td>
+            </tr>`
+            )
+            .join("")}
         </table>
       `
   }
