@@ -9,20 +9,19 @@
 
 <header>
   <h1>RepsRealm</h1>
-  <nav>
-    <% if (user) { %>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/add-workout">Add Workout</a>
-      <a href="/view-workouts">View Workouts</a>
-      <a href="/search">Search</a>
-      <a href="/progress">Progress</a>
-      <a href="/logout">Logout</a>
-    <% } else { %>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    <% } %>
-  </nav>
+<nav>
+  <% if (user) { %>
+    <a href="/">Home</a>
+    <a href="/add-workout">Add Workout</a>
+    <a href="/view-workouts">View Workouts</a>
+    <a href="/search">Search</a>
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  <% } %>
+</nav>
 </header>
 
 <div class="container">
