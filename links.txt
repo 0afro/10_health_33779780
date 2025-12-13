@@ -1,0 +1,7 @@
+home=https://www.doc.gold.ac.uk/usr/261/
+about=https://www.doc.gold.ac.uk/usr/261/about
+login=https://www.doc.gold.ac.uk/usr/261/login
+register=https://www.doc.gold.ac.uk/usr/261/register
+add_workout=https://www.doc.gold.ac.uk/usr/261/add-workout
+view_workouts=https://www.doc.gold.ac.uk/usr/261/view-workouts
+search=https://www.doc.gold.ac.uk/usr/261/search
